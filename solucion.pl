@@ -6,7 +6,7 @@ vive(alf,vivienda(departamento,3,1,almagro)).
 vive(julian,vivienda(loft,2000,almagro)). %loft(anio)
 vive(vale,vivienda(departamento,4,1,flores)).
 vive(fer,vivienda(casa,110,flores)).
-seQuiereMudar(rocio,vivienda(casa,90)).
+
 %% 2. esCopada
 
 esCopada(casa):-
@@ -47,3 +47,19 @@ esBarata(loft):-
 barrioCaro(Barrio):-
     vive(_,vivienda(_,_,Barrio)),
     forall(vive(_,vivienda(Vivienda,_,Barrio)), not(esBarata(Vivienda))).
+
+%% Punto 4 
+
+precioCasa(juan,150).
+precioCasa(julian,200).
+precioCasa(pepita,30).
+precioCasa(franco,251).
+
+casasDisponiblesParaComprar(Dinero, ListaDeCasas):-
+precioCasa(Casa,PrecioCasa),
+findall(Casa, puedoComprarCasa(PrecioCasa,Dinero), ListaDeCasas),
+
+
+
+puedoComprarCasa(PrecioCasa,Dinero):-
+PrecioCasa < Dinero.
