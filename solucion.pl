@@ -6,7 +6,7 @@ vive(alf,vivienda(departamento,3,1,almagro)).
 vive(julian,vivienda(loft,2000,almagro)). %loft(anio)
 vive(vale,vivienda(departamento,4,1,flores)).
 vive(fer,vivienda(casa,110,flores)).
-
+seQuiereMudar(rocio,vivienda(casa,90)).
 %% 2. esCopada
 
 esCopada(casa):-
@@ -51,15 +51,18 @@ barrioCaro(Barrio):-
 %% Punto 4 
 
 precioCasa(juan,150).
-precioCasa(julian,200).
-precioCasa(pepita,30).
-precioCasa(franco,251).
+precioCasa(nico,80).
+precioCasa(alf,75).
+precioCasa(julian,140).
+precioCasa(vale,95).
+precioCasa(fer,60).
 
+%% devuelve el nombre del propietario de las casas que se pueden comprar y el respectivo vuelto.
 casasDisponiblesParaComprar(Dinero, ListaDeCasas):-
 precioCasa(Casa,PrecioCasa),
-findall(Casa, puedoComprarCasa(PrecioCasa,Dinero), ListaDeCasas),
+findall((Casa,Vuelto), puedoComprarCasa(PrecioCasa,Dinero, Vuelto), ListaDeCasas).
 
 
-
-puedoComprarCasa(PrecioCasa,Dinero):-
-PrecioCasa < Dinero.
+%% aux
+puedoComprarCasa(PrecioCasa,Dinero, Vuelto):-
+PrecioCasa < Dinero, Vuelto is Dinero -PrecioCasa.
