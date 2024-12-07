@@ -24,7 +24,8 @@ esCopada(Vivienda):-
 esCopada(Vivienda):-
     vive(_,vivienda(Vivienda,AnioConstruccion,_)),
     AnioConstruccion > 2015.
-
+%% PUNTO 2 
 barrioCopado(Barrio):-
-    vive(_,vivienda(Vivienda,_,_)),
-    forall(vive(_,vivienda(Vivienda,_,Barrio), esCopada(Vivienda))).
+    vive(_,vivienda(_,_,Barrio)),
+    forall(vive(_,vivienda(Vivienda,_,Barrio)), esCopada(Vivienda)).
+
