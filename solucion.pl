@@ -13,19 +13,37 @@ esCopada(casa):-
     vive(_,vivienda(casa,Metros,_)),
     Metros > 100.
 
-esCopada(Vivienda):-
-    vive(_,vivienda(Vivienda,Ambientes,_,_)),
+esCopada(departamento):-
+    vive(_,vivienda(departamento,Ambientes,_,_)),
     Ambientes > 3.
 
-esCopada(Vivienda):-
-    vive(_,vivienda(Vivienda,_,Banios,_)),
+esCopada(departamento):-
+    vive(_,vivienda(departamento,_,Banios,_)),
     Banios > 1.
 
-esCopada(Vivienda):-
-    vive(_,vivienda(Vivienda,AnioConstruccion,_)),
+esCopada(loft):-
+    vive(_,vivienda(loft,AnioConstruccion,_)),
     AnioConstruccion > 2015.
 %% PUNTO 2 
 barrioCopado(Barrio):-
     vive(_,vivienda(_,_,Barrio)),
     forall(vive(_,vivienda(Vivienda,_,Barrio)), esCopada(Vivienda)).
 
+%% PUNTO 3 Barrio Caro
+
+esBarata(casa):-
+        vive(_,vivienda(casa,Metros,_)),
+        Metros < 90.
+    
+esBarata(departamento):-
+    vive(_,vivienda(departamento,Ambientes,_,_)),
+    Ambientes < 3, Ambientes > 0.
+
+esBarata(loft):-
+    vive(_,vivienda(loft,AnioConstruccion,_)),
+    AnioConstruccion < 2005.
+
+
+barrioCaro(Barrio):-
+    vive(_,vivienda(_,_,Barrio)),
+    forall(vive(_,vivienda(Vivienda,_,Barrio)), not(esBarata(Vivienda))).
